@@ -58,11 +58,22 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
 ]
 
+CORS_ORIGIN_WHITELIST = [
+    # "https://lezsuuu.com",
+    'http://localhost:3000',
+]
+
 CORS_ALLOWED_ORIGINS = [
-    "https://lezsuuu.com",
+    # "https://lezsuuu.com",
     "http://localhost:3000",
     "http://127.0.0.1:8000",
 ]
+
+# 모든 출처에서 요청 허용
+CORS_ORIGIN_ALLOW_ALL = True
+# 자격 증명 허용
+CORS_ALLOWED_CREDENTIALS = True
+
 
 ROOT_URLCONF = "app.urls"
 
