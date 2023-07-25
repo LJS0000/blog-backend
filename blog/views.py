@@ -1,10 +1,13 @@
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
-from rest_framework.response import Response
+from rest_framework import generics
+from .models import Post
+from .serializers import PostSerializer
 
 
-@api_view(['GET', 'POST'])
-@permission_classes([AllowAny])
-def hello_rest_api(request):
-    data = {'message': 'Hello, REST API!'}
-    return Response(data)
+class PostList(generics.ListCreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+
+class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
