@@ -1,12 +1,13 @@
 from django.urls import path
-from .views import hello_rest_api
+from .views import PostList, PostDetail
 
 app_name = 'blog'
 
 urlpatterns = [
-    path('api/hello/', hello_rest_api, name='hello_rest_api'),
     # 글 목록 조회
+    path('api/blog/posts/', PostList.as_view()),
     # 글 상세 조회
+    path('api/blog/posts/<int:pk>/', PostDetail.as_view()),
     # 글 작성
     # 글 수정
     # 댓글 작성
