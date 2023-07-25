@@ -5,9 +5,9 @@ app_name = 'blog'
 
 urlpatterns = [
     # 글 목록 조회
-    path('api/blog/posts/', PostList.as_view()),
+    path('posts/', PostList.as_view(), name='posts'),
     # 글 상세 조회
-    path('api/blog/posts/<int:pk>/', PostDetail.as_view()),
+    path('posts/<int:pk>/', PostDetail.as_view(), name='detail'),
     # 글 작성
     # 글 수정
     # 댓글 작성
