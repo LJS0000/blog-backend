@@ -28,3 +28,18 @@ class PostAPITestCase(APITestCase):
         data = {'title': 'Title 1', 'content': 'Content 1', 'author': self.user.id}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+    def test_update_post(self):
+        post = Post.objects.create(
+            title='Test title 1', content='Test content 1', author=self.user
+        )
+        url = reverse('blog:post-detail', kwargs={'pk': post.id})
+        data = {
+            'title': 'Updated title',
+            'content': 'Updated content',
+            'author': self.user.id,
+        }
+        response = self.client.put(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['title'], 'Updated title')
+        self.assertEqual(response.data['content'], 'Updated content')

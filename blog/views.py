@@ -14,6 +14,9 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer
     permission_classes = [permissions.AllowAny]
 
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
 
 class PostCreate(generics.CreateAPIView):
     queryset = Post.objects.all()
