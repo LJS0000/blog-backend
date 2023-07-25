@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import PostList, PostDetail
+from .views import PostList, PostDetail, PostCreate
 
 app_name = 'blog'
 
@@ -7,8 +7,9 @@ urlpatterns = [
     # 글 목록 조회
     path('posts/', PostList.as_view(), name='posts'),
     # 글 상세 조회
-    path('posts/<int:pk>/', PostDetail.as_view(), name='detail'),
+    path('posts/<int:pk>/', PostDetail.as_view(), name='post-detail'),
     # 글 작성
+    path('posts/write/', PostCreate.as_view(), name='post-write'),
     # 글 수정
     # 댓글 작성
     # 댓글 조회
