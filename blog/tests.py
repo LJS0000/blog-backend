@@ -10,9 +10,6 @@ class PostAPITestCase(APITestCase):
         self.user = User.objects.create(username='testuser', password='testpassword')
 
     def test_list_posts(self):
-        # User 인스턴스 생성
-
-        # 테스트용 데이터 생성
         Post.objects.create(
             title='Test title 1', content='Test content 1', author=self.user
         )
@@ -43,3 +40,12 @@ class PostAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['title'], 'Updated title')
         self.assertEqual(response.data['content'], 'Updated content')
+
+    def test_delete_post(self):
+        post = Post.objects.create(
+            title='Test title 1', content='Test content 1', author=self.user
+        )
+        url = reverse('blog:post-detail', kwargs={'pk': post.id})
+        response = self.client.delete(url, format='json')
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        self.assertFalse(Post.objects.filter(id=post.id).exists())
